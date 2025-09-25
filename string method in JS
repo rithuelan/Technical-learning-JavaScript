@@ -1,0 +1,7 @@
+   // ---------------------------
+    // 2. STRING METHODS
+    // ---------------------------
+    console.log("Name Length:", userName.length);
+    console.log("Uppercase:", userName.toUpperCase());
+    console.log("First 3 letters:", userName.slice(0,3));
+    console.log("Replace example:", userName.replace(userName[0], "@"));
