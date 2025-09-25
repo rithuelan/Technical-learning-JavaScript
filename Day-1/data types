@@ -1,0 +1,24 @@
+<script>
+// Primitive
+let str = "Hello";      // String
+let num = 100;          // Number
+let bool = false;       // Boolean
+let nothing = null;     // Null
+let notDefined;         // Undefined
+let sym = Symbol("id"); // Symbol (unique)
+
+// Reference
+let arr = [1, 2, 3];           // Array
+let obj = { name: "Rithiha", age: 21 }; // Object
+let fun = function() { return "Hi"; }; // Function
+
+console.log(typeof str);  // string
+console.log(typeof num);  // number
+console.log(typeof bool); // boolean
+console.log(typeof nothing); // object (quirk in JS!)
+console.log(typeof notDefined); // undefined
+console.log(typeof sym);  // symbol
+console.log(typeof arr);  // object
+console.log(typeof obj);  // object
+console.log(typeof fun);  // function
+</script>
