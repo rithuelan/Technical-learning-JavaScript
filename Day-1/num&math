@@ -1,0 +1,23 @@
+<script>
+let num = -7.8;
+
+console.log("Absolute:", Math.abs(num)); // 7.8
+console.log("Round:", Math.round(num));  // -8
+console.log("Floor:", Math.floor(num));  // -8
+console.log("Ceil:", Math.ceil(num));    // -7
+console.log("Max:", Math.max(10, 20, 5)); // 20
+console.log("Min:", Math.min(10, 20, 5)); // 5
+console.log("Power:", Math.pow(2, 4));   // 16
+console.log("Sqrt:", Math.sqrt(49));     // 7
+
+// Random examples
+console.log("Random (0–1):", Math.random());
+console.log("Random (1–100):", Math.floor(Math.random() * 100) + 1);
+
+// Number methods
+let n = 123.456;
+console.log("toFixed(2):", n.toFixed(2));  // "123.46"
+console.log("toString:", n.toString());   // "123.456"
+console.log("parseInt:", parseInt("50px"));  // 50
+console.log("parseFloat:", parseFloat("12.34px")); // 12.34
+</script>
