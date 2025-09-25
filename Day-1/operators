@@ -1,0 +1,37 @@
+<script>
+let a = 12, b = 5;
+
+// Arithmetic
+console.log("Add:", a + b);
+console.log("Sub:", a - b);
+console.log("Mul:", a * b);
+console.log("Div:", a / b);
+console.log("Mod:", a % b);
+console.log("Exp:", a ** b); // exponent (12^5)
+
+// Assignment
+let x = 10;
+x += 5; // 15
+x -= 3; // 12
+x *= 2; // 24
+x /= 4; // 6
+console.log("Final x:", x);
+
+// Comparison
+console.log("== :", 5 == "5");   // true (loose)
+console.log("=== :", 5 === "5"); // false (strict)
+console.log("!= :", 5 != "5");   // false
+console.log("!== :", 5 !== "5"); // true
+console.log("> :", a > b);
+console.log("< :", a < b);
+
+// Logical
+console.log("AND:", (a > 10 && b < 10)); // true
+console.log("OR:", (a > 10 || b > 10));  // true
+console.log("NOT:", !(a > b));           // false
+
+// Ternary
+let age = 18;
+let result = (age >= 18) ? "Adult" : "Minor";
+console.log("Ternary:", result);
+</script>
