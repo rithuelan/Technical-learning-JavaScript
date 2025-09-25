@@ -3,72 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JS Basics Project</title>
+  <title>JS Basics Playground</title>
 </head>
 <body>
-  <h1>JavaScript Basics Project</h1>
+  <h1>JavaScript Basics Playground</h1>
   <script>
-    // ---------------------------
-    // 1. VARIABLES + DATA TYPES
-    // ---------------------------
-    var oldWay = "I am var (not recommended)";
-    let userName = prompt("Enter your name:"); // String
-    const pi = 3.14; // Constant Number
-    let age = 20;    // Number
-    let isStudent = true; // Boolean
-    let unknown; // Undefined
-    let emptyValue = null; // Null
+    // -----------------------------
+    // 1. Variables + Data Types
+    // -----------------------------
+    let userName = prompt("Enter your name:");
+    let age = Number(prompt("Enter your age:"));
+    const pi = 3.14159;
+    let isStudent = true;
 
-    console.log("Name:", userName);
-    console.log("Age:", age);
-    console.log("Is Student:", isStudent);
-    console.log("Unknown:", unknown);
-    console.log("Empty:", emptyValue);
+    console.log(`Hello ${userName}, you are ${age} years old. Student: ${isStudent}`);
 
-    // ---------------------------
-    // 2. STRING METHODS
-    // ---------------------------
-    console.log("Name Length:", userName.length);
+    // -----------------------------
+    // 2. String operations
+    // -----------------------------
+    console.log("Length:", userName.length);
     console.log("Uppercase:", userName.toUpperCase());
-    console.log("First 3 letters:", userName.slice(0,3));
-    console.log("Replace example:", userName.replace(userName[0], "@"));
+    console.log("First 2 letters:", userName.slice(0,2));
+    console.log("Replace:", userName.replace(userName[0], "#"));
 
-    // ---------------------------
-    // 3. OPERATORS
-    // ---------------------------
-    let num1 = 10;
-    let num2 = 5;
+    // -----------------------------
+    // 3. Operators
+    // -----------------------------
+    let a = 12, b = 5;
+    console.log("a + b =", a + b);
+    console.log("a - b =", a - b);
+    console.log("a * b =", a * b);
+    console.log("a / b =", a / b);
+    console.log("a % b =", a % b);
+    console.log("a > b ?", (a > b) ? "Yes" : "No");
 
-    console.log("Addition:", num1 + num2);     // Arithmetic
-    console.log("Comparison (==):", num1 == "10"); // true
-    console.log("Strict Comparison (===):", num1 === "10"); // false
-    console.log("Logical AND:", (num1 > 0 && num2 > 0)); // true
+    // -----------------------------
+    // 4. Numbers + Math
+    // -----------------------------
+    console.log("Random (1-10):", Math.floor(Math.random() * 10) + 1);
+    console.log("Sqrt of 25:", Math.sqrt(25));
+    console.log("Pi:", pi.toFixed(2));
 
-    // Ternary operator
-    let checkAge = (age >= 18) ? "Adult" : "Minor";
-    console.log("You are:", checkAge);
+    // -----------------------------
+    // 5. Calculator
+    // -----------------------------
+    let n1 = Number(prompt("Enter first number:"));
+    let n2 = Number(prompt("Enter second number:"));
+    console.log("Addition:", n1 + n2);
+    console.log("Subtraction:", n1 - n2);
+    console.log("Multiplication:", n1 * n2);
+    console.log("Division:", n1 / n2);
 
-    // ---------------------------
-    // 4. NUMBERS + MATH
-    // ---------------------------
-    console.log("Random number:", Math.random());
-    console.log("Random integer (1–10):", Math.floor(Math.random() * 10) + 1);
-    console.log("Pi value:", pi);
+    // -----------------------------
+    // 6. Number Guessing Game
+    // -----------------------------
+    let secret = Math.floor(Math.random() * 5) + 1;
+    let guess = Number(prompt("Guess a number (1-5):"));
+    if (guess === secret) {
+      console.log("🎉 Correct! You guessed it.");
+    } else {
+      console.log(`❌ Wrong! The number was ${secret}`);
+    }
 
-    // ---------------------------
-    // 5. SMALL CALCULATOR
-    // ---------------------------
-    let a = Number(prompt("Enter first number:"));
-    let b = Number(prompt("Enter second number:"));
-    console.log("Sum =", a + b);
-    console.log("Difference =", a - b);
-    console.log("Product =", a * b);
-    console.log("Quotient =", a / b);
-
-    // ---------------------------
-    // END
-    // ---------------------------
-    console.log("Hello, " + userName + "! Your profile and calculations are ready ✅");
+    console.log("Thanks for playing, " + userName + " ✅");
   </script>
 </body>
 </html>
