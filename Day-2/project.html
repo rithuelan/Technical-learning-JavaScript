@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Todo Manager — Learn JS</title>
+<style>
+  body { font-family: system-ui, Arial; max-width:800px; margin:24px auto; padding:0 16px; }
+  header { display:flex; gap:12px; align-items:center; }
+  input[type="text"] { padding:8px; flex:1; }
+  button { padding:8px 10px; }
+  ul { list-style:none; padding:0; }
+  li { display:flex; align-items:center; gap:8px; padding:8px; border-bottom:1px solid #eee; }
+  li.completed { opacity:0.6; text-decoration:line-through; }
+  .meta { font-size:0.8rem; color:#666; margin-left:auto; }
+  .controls { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Todo Manager</h1>
+  </header>
+
+  <div>
+    <input id="newTask" type="text" placeholder="Add a task (press Add)"/>
+    <button id="addBtn">Add</button>
+  </div>
+
+  <div class="controls">
+    <input id="search" type="text" placeholder="Search tasks"/>
+    <select id="filter">
+      <option value="all">All</option>
+      <option value="active">Active</option>
+      <option value="done">Completed</option>
+    </select>
+    <button id="clearDone">Clear completed</button>
+  </div>
+
+  <p id="stats"></p>
+  <ul id="list"></ul>
+
+<script>
+/*
+  Todo Manager — demonstrates:
+  - control flow (if / ternary / switch)
+  - loops (forEach, for...of, reduce)
+  - functions (declaration, arrow)
+  - scope & closures (id generator and module pattern)
+  - arrays & objects (task array of objects)
+  - strings (search, template literals)
+*/
+
+// App module (IIFE) to create private scope & closure
+const TodoApp = (function() {
+  // closure for unique id
+  const genId = (function() { let id = 0; return () => ++id; })();
+
+  // private state
+  let tasks = [
+    { id: genId(), text: 'Learn JavaScript basics', completed: false, createdAt: Date.now() }
+  ];
+
+  // DOM refs
+  const refs = {
+    list: document.getElementById('list'),
+    newTask: document.getElementById('newTask'),
+    addBtn: document.getElementById('addBtn'),
+    search: document.getElementById('search'),
+    filter: document.getElementById('filter'),
+    stats: document.getElementById('stats'),
+    clearDone: document.getElementById('clearDone')
+  };
+
+  // Helpers
+  function saveToLocal() {
+    try {
+      localStorage.setItem('todo.tasks', JSON.stringify(tasks));
+    } catch (e) { /* ignore if storage not available */ }
+  }
+  function loadFromLocal() {
+    try {
+      const raw = localStorage.getItem('todo.tasks');
+      if (raw) tasks = JSON.parse(raw);
+    } catch (e) { /* ignore */ }
+  }
+
+  function formatTime(ts) {
+    const d = new Date(ts);
+    return d.toLocaleString();
+  }
+
+  // Core functions
+  function addTask(text) {
+    const trimmed = (text || '').trim();
+    if (!trimmed) return false; // control flow: input validation
+    tasks.push({ id: genId(), text: trimmed, completed: false, createdAt: Date.now() });
+    saveToLocal();
+    render();
+    return true;
+  }
+
+  function toggleTask(id) {
+    // for...of + control flow
+    for (const t of tasks) {
+      if (t.id === id) {
+        t.completed = !t.completed;
+        break;
+      }
+    }
+    saveToLocal();
+    render();
+  }
+
+  function deleteTask(id) {
+    tasks = tasks.filter(t => t.id !== id); // array filter
+    saveToLocal();
+    render();
+  }
+
+  function editTask(id, newText) {
+    const trimmed = (newText || '').trim();
+    if (!trimmed) return false;
+    for (const t of tasks) {
+      if (t.id === id) {
+        t.text = trimmed;
+        break;
+      }
+    }
+    saveToLocal();
+    render();
+    return true;
+  }
+
+  function clearCompleted() {
+    tasks = tasks.filter(t => !t.completed);
+    saveToLocal();
+    render();
+  }
+
+  // render uses map/filter/reduce and demonstrates string templates
+  function render() {
+    const q = refs.search.value.trim().toLowerCase();
+    const f = refs.filter.value; // 'all' | 'active' | 'done'
+
+    // apply search & filter
+    const visible = tasks
+      .filter(t => {
+        // filter by search: strings
+        if (q && !t.text.toLowerCase().includes(q)) return false;
+        if (f === 'active') return !t.completed;
+        if (f === 'done') return t.completed;
+        return true;
+      });
+
+    // build DOM list (clear then append)
+    refs.list.innerHTML = '';
+    for (const t of visible) {
+      const li = document.createElement('li');
+      li.className = t.completed ? 'completed' : '';
+      // template literal and destructuring
+      const { id, text, completed, createdAt } = t;
+
+      li.innerHTML = `
+        <input type="checkbox" ${completed ? 'checked' : ''} data-id="${id}">
+        <span class="text" contenteditable="false" data-id="${id}">${escapeHtml(text)}</span>
+        <span class="meta">${formatTime(createdAt)}</span>
+        <button data-action="edit" data-id="${id}">Edit</button>
+        <button data-action="delete" data-id="${id}">Delete</button>
+      `;
+
+      refs.list.appendChild(li);
+    }
+
+    // stats with reduce
+    const total = tasks.length;
+    const done = tasks.reduce((acc, t) => acc + (t.completed ? 1 : 0), 0);
+    refs.stats.textContent = `Total: ${total} • Completed: ${done} • Active: ${total - done}`;
+  }
+
+  // small utility to avoid HTML injection when showing tasks
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  // wire events
+  function bind() {
+    refs.addBtn.addEventListener('click', () => {
+      addTask(refs.newTask.value);
+      refs.newTask.value = '';
+      refs.newTask.focus();
+    });
+
+    refs.newTask.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        addTask(refs.newTask.value);
+        refs.newTask.value = '';
+      }
+    });
+
+    refs.search.addEventListener('input', render);
+    refs.filter.addEventListener('change', render);
+    refs.clearDone.addEventListener('click', clearCompleted);
+
+    // delegate checkbox, edit, delete
+    refs.list.addEventListener('click', (e) => {
+      const target = e.target;
+      // checkbox
+      if (target.tagName === 'INPUT' && target.type === 'checkbox') {
+        const id = Number(target.dataset.id);
+        toggleTask(id);
+        return;
+      }
+      // buttons
+      const action = target.dataset.action;
+      if (action === 'delete') {
+        deleteTask(Number(target.dataset.id));
+      } else if (action === 'edit') {
+        const span = target.parentElement.querySelector('.text');
+        const id = Number(target.dataset.id);
+        span.contentEditable = 'true';
+        span.focus();
+        // when user finishes editing (blur or Enter)
+        const finish = () => {
+          span.contentEditable = 'false';
+          editTask(id, span.textContent);
+          span.removeEventListener('blur', finish);
+        };
+        span.addEventListener('blur', finish);
+      }
+    });
+  }
+
+  // public init
+  function init() {
+    loadFromLocal();
+    bind();
+    render();
+  }
+
+  // expose only init (module pattern)
+  return { init };
+})();
+
+// start the app
+TodoApp.init();
+</script>
+</body>
+</html>

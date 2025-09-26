@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Variable Shadowing</title>
+</head>
+<body>
+  <h2>Variable Shadowing</h2>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    let shadowVar = "Global";
+
+    function shadowTest() {
+        let shadowVar = "Local"; // Shadows global
+        output.innerHTML += "Inside function: " + shadowVar + "<br>";
+    }
+
+    shadowTest();
+    output.innerHTML += "Outside function: " + shadowVar + "<br>";
+  </script>
+</body>
+</html>

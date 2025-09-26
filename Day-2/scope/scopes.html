@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Global vs Local Scope</title>
+</head>
+<body>
+  <h2>Global vs Local Scope</h2>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    let globalVar = "I am global";
+
+    function showLocal() {
+        let localVar = "I am local";
+        output.innerHTML += "Global inside function: " + globalVar + "<br>";
+        output.innerHTML += "Local inside function: " + localVar + "<br>";
+    }
+
+    showLocal();
+
+    output.innerHTML += "Global outside function: " + globalVar + "<br>";
+    // console.log(localVar); // ❌ Error: localVar is not accessible
+  </script>
+</body>
+</html>

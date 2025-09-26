@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Conditional Statements in JavaScript</title>
+</head>
+<body>
+  <h1>JavaScript Conditional Statements - Complete Coverage</h1>
+  <script>
+    // -------------------------
+    // 1. if statement
+    // -------------------------
+    let age = 20;
+    if (age >= 18) {
+      document.write("<p>1. IF: You are an adult.</p>");
+    }
+
+    // -------------------------
+    // 2. if...else statement
+    // -------------------------
+    let isRaining = false;
+    if (isRaining) {
+      document.write("<p>2. IF...ELSE: Take an umbrella.</p>");
+    } else {
+      document.write("<p>2. IF...ELSE: No need for umbrella.</p>");
+    }
+
+    // -------------------------
+    // 3. if...else if...else chain
+    // -------------------------
+    let marks = 72;
+    if (marks >= 90) {
+      document.write("<p>3. ELSE IF: Grade A</p>");
+    } else if (marks >= 75) {
+      document.write("<p>3. ELSE IF: Grade B</p>");
+    } else if (marks >= 50) {
+      document.write("<p>3. ELSE IF: Grade C</p>");
+    } else {
+      document.write("<p>3. ELSE IF: Fail</p>");
+    }
+
+    // -------------------------
+    // 4. switch statement
+    // -------------------------
+    let day = "Wednesday";
+    switch (day) {
+      case "Monday":
+        document.write("<p>4. SWITCH: Start of the week</p>");
+        break;
+      case "Wednesday":
+        document.write("<p>4. SWITCH: Midweek</p>");
+        break;
+      case "Friday":
+        document.write("<p>4. SWITCH: Weekend is near!</p>");
+        break;
+      default:
+        document.write("<p>4. SWITCH: Regular day</p>");
+    }
+
+    // -------------------------
+    // 5. Ternary operator (? :)
+    // -------------------------
+    let score = 45;
+    let result = (score >= 50) ? "Pass" : "Fail";
+    document.write("<p>5. TERNARY: Score 45 → " + result + "</p>");
+
+    // -------------------------
+    // 6. Nested Conditionals
+    // -------------------------
+    let username = "admin";
+    let password = "1234";
+
+    if (username === "admin") {
+      if (password === "1234") {
+        document.write("<p>6. NESTED IF: Login successful</p>");
+      } else {
+        document.write("<p>6. NESTED IF: Wrong password</p>");
+      }
+    } else {
+      document.write("<p>6. NESTED IF: User not found</p>");
+    }
+
+    // switch inside if
+    let role = "editor";
+    if (role) {
+      switch (role) {
+        case "admin":
+          document.write("<p>6. SWITCH inside IF: Full access</p>");
+          break;
+        case "editor":
+          document.write("<p>6. SWITCH inside IF: Edit access only</p>");
+          break;
+        default:
+          document.write("<p>6. SWITCH inside IF: View only</p>");
+      }
+    }
+  </script>
+</body>
+</html>

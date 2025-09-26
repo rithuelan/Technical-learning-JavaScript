@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scope & Closures Project</title>
+</head>
+<body>
+  <h1>Grade Checker Project</h1>
+  <input type="number" id="score" placeholder="Enter score (0-100)">
+  <button onclick="checkGrade()">Check Grade</button>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    function log(msg) {
+        output.innerHTML += msg + "<br>";
+    }
+
+    function checkGrade() {
+        output.innerHTML = ""; // Clear previous output
+        let score = Number(document.getElementById("score").value);
+
+        // Closure to determine grade
+        function gradeCalculator(score) {
+            return function() {
+                if(score >= 90) return "A";
+                if(score >= 75) return "B";
+                if(score >= 60) return "C";
+                return "F";
+            }
+        }
+
+        const gradeFunc = gradeCalculator(score);
+        let grade = gradeFunc();
+        log("Score: " + score);
+        log("Grade: " + grade);
+
+        // Variable shadowing example
+        {
+            let gradeShadow = "Temporary Grade"; // Use different variable name or block scope
+            log("Shadowed grade inside block: " + gradeShadow);
+        }
+
+        // Lexical scope demo
+        function showMessage() {
+            let message = score >= 60 ? "Pass" : "Fail";
+            log("Result: " + message);
+        }
+        showMessage();
+    }
+  </script>
+</body>
+</html>

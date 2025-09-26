@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Closures</title>
+</head>
+<body>
+  <h2>Closures</h2>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    function outerFunction(outerValue) {
+        return function innerFunction(innerValue) {
+            output.innerHTML += "Outer: " + outerValue + "<br>";
+            output.innerHTML += "Inner: " + innerValue + "<br>";
+        }
+    }
+
+    const myClosure = outerFunction("I am remembered!");
+    myClosure("I am new!");
+  </script>
+</body>
+</html>

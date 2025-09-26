@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lexical Scope</title>
+</head>
+<body>
+  <h2>Lexical Scope</h2>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    function parentFunction() {
+        let parentVar = "I am from parent";
+
+        function childFunction() {
+            output.innerHTML += "Access from child (lexical): " + parentVar + "<br>";
+        }
+
+        childFunction();
+    }
+
+    parentFunction();
+  </script>
+</body>
+</html>
