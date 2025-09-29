@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile - Objects Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f9;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    button {
+      margin: 5px;
+      padding: 10px;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: white;
+      min-height: 80px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧑‍🎓 Student Profile - Objects Demo</h1>
+  
+  <button onclick="showProperties()">Show Properties</button>
+  <button onclick="callMethod()">Call Method</button>
+  <button onclick="showNested()">Show Nested Object</button>
+  <button onclick="destructure()">Destructuring</button>
+  <button onclick="showKeys()">Object.keys()</button>
+  <button onclick="showValues()">Object.values()</button>
+  <button onclick="showEntries()">Object.entries()</button>
+
+  <div id="output"></div>
+
+  <script>
+    // === Object Creation with Properties & Methods ===
+    const student = {
+      name: "Rithiha",
+      age: 20,
+      course: "Computer Science",
+      marks: {
+        math: 85,
+        english: 90,
+        science: 92
+      },
+      greet: function() {
+        return `Hello, my name is ${this.name} and I study ${this.course}.`;
+      }
+    };
+
+    // Utility to display results
+    function display(text) {
+      document.getElementById("output").innerHTML = text;
+    }
+
+    // Show properties
+    function showProperties() {
+      display(`Name: ${student.name}<br>Age: ${student.age}<br>Course: ${student.course}`);
+    }
+
+    // Call method
+    function callMethod() {
+      display(student.greet());
+    }
+
+    // Nested object
+    function showNested() {
+      display(`Math: ${student.marks.math}, English: ${student.marks.english}, Science: ${student.marks.science}`);
+    }
+
+    // Destructuring
+    function destructure() {
+      const { name, course } = student;
+      display(`Destructured → Name: ${name}, Course: ${course}`);
+    }
+
+    // Object.keys()
+    function showKeys() {
+      display("Keys: " + Object.keys(student).join(", "));
+    }
+
+    // Object.values()
+    function showValues() {
+      display("Values: " + Object.values(student).join(", "));
+    }
+
+    // Object.entries()
+    function showEntries() {
+      let entries = Object.entries(student);
+      let result = entries.map(([key, value]) => `${key}: ${value}`).join("<br>");
+      display(result);
+    }
+  </script>
+</body>
+</html>
