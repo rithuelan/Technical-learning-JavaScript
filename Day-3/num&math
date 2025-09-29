@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    input {
+      padding: 8px;
+      margin: 5px 0;
+      width: 200px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      background-color: #27ae60;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1e8449;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: white;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h1>💰 Tip Calculator</h1>
+  
+  <label>Bill Amount ($):</label><br>
+  <input type="text" id="billAmount" placeholder="Enter bill amount"><br>
+
+  <label>Tip Percentage (%):</label><br>
+  <input type="text" id="tipPercent" placeholder="Enter tip %"><br>
+
+  <button onclick="calculateTip()">Calculate Tip</button>
+  <button onclick="resetFields()">Reset</button>
+
+  <div id="output">Tip result will appear here...</div>
+
+  <script>
+    function calculateTip() {
+      let bill = parseFloat(document.getElementById("billAmount").value);
+      let tipPercent = parseFloat(document.getElementById("tipPercent").value);
+
+      // Validate input
+      if (isNaN(bill) || isNaN(tipPercent)) {
+        document.getElementById("output").innerHTML = "Please enter valid numbers!";
+        return;
+      }
+
+      // Calculate tip
+      let tip = bill * (tipPercent / 100);
+      let total = bill + tip;
+
+      // Round tip and total to 2 decimals
+      tip = tip.toFixed(2);
+      total = total.toFixed(2);
+
+      document.getElementById("output").innerHTML = `
+        Bill Amount: $${bill} <br>
+        Tip (${tipPercent}%): $${tip} <br>
+        <b>Total: $${total}</b>
+      `;
+    }
+
+    function resetFields() {
+      document.getElementById("billAmount").value = "";
+      document.getElementById("tipPercent").value = "";
+      document.getElementById("output").innerHTML = "Tip result will appear here...";
+    }
+  </script>
+</body>
+</html>
