@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart - Array Methods</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    button {
+      margin: 5px;
+      padding: 10px;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #cart {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛒 Shopping Cart - Array Demo</h1>
+
+  <p><b>Cart Items:</b></p>
+  <div id="cart"></div>
+
+  <h3>Operations:</h3>
+  <button onclick="addItem()">Push (Add to End)</button>
+  <button onclick="removeItem()">Pop (Remove from End)</button>
+  <button onclick="addFirst()">Unshift (Add to Start)</button>
+  <button onclick="removeFirst()">Shift (Remove from Start)</button>
+  <button onclick="spliceExample()">Splice (Add/Remove)</button>
+  <button onclick="sliceExample()">Slice (Copy Part)</button>
+  <button onclick="mapExample()">Map (Uppercase)</button>
+  <button onclick="filterExample()">Filter (>4 letters)</button>
+  <button onclick="reduceExample()">Reduce (Count Letters)</button>
+
+  <script>
+    // === Array Creation ===
+    let cart = ["apple", "banana", "cherry"];
+    displayCart();
+
+    // Show cart in HTML
+    function displayCart() {
+      document.getElementById("cart").innerText = cart.join(", ");
+    }
+
+    // push()
+    function addItem() {
+      cart.push("mango");
+      displayCart();
+    }
+
+    // pop()
+    function removeItem() {
+      cart.pop();
+      displayCart();
+    }
+
+    // unshift()
+    function addFirst() {
+      cart.unshift("orange");
+      displayCart();
+    }
+
+    // shift()
+    function removeFirst() {
+      cart.shift();
+      displayCart();
+    }
+
+    // splice()
+    function spliceExample() {
+      cart.splice(1, 0, "grape", "kiwi"); // add at index 1
+      displayCart();
+    }
+
+    // slice()
+    function sliceExample() {
+      let sliced = cart.slice(0, 2);
+      alert("Slice result (first 2 items): " + sliced.join(", "));
+    }
+
+    // map()
+    function mapExample() {
+      let upper = cart.map(item => item.toUpperCase());
+      alert("Uppercased: " + upper.join(", "));
+    }
+
+    // filter()
+    function filterExample() {
+      let filtered = cart.filter(item => item.length > 4);
+      alert("Filtered (>4 letters): " + filtered.join(", "));
+    }
+
+    // reduce()
+    function reduceExample() {
+      let total = cart.reduce((sum, item) => sum + item.length, 0);
+      alert("Total letters in cart: " + total);
+    }
+  </script>
+</body>
+</html>
+
+
