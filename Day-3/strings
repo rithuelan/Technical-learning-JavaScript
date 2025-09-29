@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String Playground</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    input {
+      width: 250px;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: white;
+      min-height: 80px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 String Playground</h1>
+  
+  <p>Enter a string:</p>
+  <input type="text" id="userString" value="Hello World">
+
+  <h3>Operations:</h3>
+  <button onclick="showLength()">Length</button>
+  <button onclick="concatenate()">Concatenation</button>
+  <button onclick="templateLiteral()">Template Literal</button>
+  <button onclick="escapeExample()">Escaping Characters</button>
+  <button onclick="stringMethods()">String Methods</button>
+
+  <div id="output">Result will appear here...</div>
+
+  <script>
+    function getInput() {
+      return document.getElementById("userString").value;
+    }
+
+    function display(text) {
+      document.getElementById("output").innerHTML = text;
+    }
+
+    // 1. String Length
+    function showLength() {
+      let str = getInput();
+      display(`Length of "${str}" is <b>${str.length}</b>`);
+    }
+
+    // 2. Concatenation
+    function concatenate() {
+      let str = getInput();
+      let added = str.concat(" 🎉 Welcome!");
+      display(`Concatenated String: <br><b>${added}</b>`);
+    }
+
+    // 3. Template Literals
+    function templateLiteral() {
+      let str = getInput();
+      let name = "Rithiha";
+      let result = `Hey ${name}, you typed: "${str}"`;
+      display(result);
+    }
+
+    // 4. Escaping Characters
+    function escapeExample() {
+      let escaped = "He said: \"JavaScript is fun!\" \nNew line here.";
+      display("Escaped String Example:<br><pre>" + escaped + "</pre>");
+    }
+
+    // 5. String Methods
+    function stringMethods() {
+      let str = getInput();
+      let result = `
+        Uppercase: ${str.toUpperCase()} <br>
+        Lowercase: ${str.toLowerCase()} <br>
+        Slice(0,5): ${str.slice(0,5)} <br>
+        Replace 'o' with '0': ${str.replace(/o/g, "0")} <br>
+        Includes 'World'? ${str.includes("World")} <br>
+        Split by space: ${str.split(" ")} 
+      `;
+      display(result);
+    }
+  </script>
+</body>
+</html>
