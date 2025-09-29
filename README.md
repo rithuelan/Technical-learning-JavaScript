@@ -9,7 +9,6 @@ learning JavaScript and updating in this repository.
 - **DataTypes** in JavaScript
 - **Math & Num** in JS
 - **small calculator project using math&num**   
-
 ---
 
 ## **DAY 2** – Technical Learning 💻
@@ -20,5 +19,13 @@ learning JavaScript and updating in this repository.
 - **scopes** in JavaScript
 - **loops** in JS
 - **completed small project**   
+---
 
+## **DAY 3** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **arrays**  
+- **numbers and maths** in JavaScript
+- **objects** in JavaScript  
+- **Strings** in JavaScript
+- **covered all topics with small project**   
 ---
