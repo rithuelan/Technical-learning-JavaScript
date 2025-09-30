@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Error Handling Project</title>
+</head>
+<body>
+  <h1>JavaScript Error Handling Project</h1>
+
+  <button onclick="divideNumbers()">Divide Numbers</button>
+  <button onclick="customError()">Custom Error Example</button>
+  <button onclick="referenceErrorExample()">Reference Error</button>
+  <button onclick="finallyExample()">Finally Example</button>
+
+  <div id="output" style="margin-top:20px; font-size:18px; font-family:monospace; color:darkblue;"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // 1. Divide numbers with try...catch
+    function divideNumbers() {
+      let a = prompt("Enter first number:");
+      let b = prompt("Enter second number:");
+
+      try {
+        if (isNaN(a) || isNaN(b)) {
+          throw "Invalid input! Please enter numbers only.";
+        }
+        if (Number(b) === 0) {
+          throw "Cannot divide by zero!";
+        }
+        let result = Number(a) / Number(b);
+        output.innerText = `Result = ${result}`;
+      } catch (error) {
+        output.innerText = "Error: " + error;
+      }
+    }
+
+    // 2. Custom error with throw
+    function customError() {
+      try {
+        let age = prompt("Enter your age:");
+        if (age < 0) {
+          throw new Error("Age cannot be negative!");
+        }
+        output.innerText = `Your age is ${age}`;
+      } catch (error) {
+        output.innerText = "Caught Custom Error: " + error.message;
+      }
+    }
+
+    // 3. Built-in ReferenceError
+    function referenceErrorExample() {
+      try {
+        output.innerText = notDeclaredVar; // This variable doesn't exist
+      } catch (error) {
+        output.innerText = "Caught Error: " + error.name + " → " + error.message;
+      }
+    }
+
+    // 4. Finally block
+    function finallyExample() {
+      try {
+        let num = prompt("Enter a positive number:");
+        if (num < 0) throw "Negative number not allowed!";
+        output.innerText = "Number is valid: " + num;
+      } catch (error) {
+        output.innerText = "Error: " + error;
+      } finally {
+        console.log("This will always run (cleanup, logs, etc.)");
+      }
+    }
+  </script>
+</body>
+</html>
