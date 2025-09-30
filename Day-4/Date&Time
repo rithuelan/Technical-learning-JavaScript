@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date & Time Project</title>
+</head>
+<body>
+  <h1>JavaScript Date & Time Project</h1>
+
+  <button onclick="showCurrentDate()">Show Current Date & Time</button>
+  <button onclick="showParts()">Show Date Parts</button>
+  <button onclick="setFutureDate()">Set Future Date</button>
+  <button onclick="showTimestamp()">Show Timestamp</button>
+  <button onclick="startClock()">Start Real-Time Clock</button>
+
+  <div id="output" style="margin-top:20px; font-size:18px; font-family:monospace;"></div>
+  <div id="clock" style="margin-top:20px; font-size:22px; color:blue;"></div>
+
+  <script>
+    const output = document.getElementById("output");
+    const clock = document.getElementById("clock");
+
+    // 1. Show full current date & time
+    function showCurrentDate() {
+      let now = new Date();
+      output.innerText = "Current Date & Time: " + now;
+    }
+
+    // 2. Show different parts of the date
+    function showParts() {
+      let now = new Date();
+      output.innerText =
+        "Year: " + now.getFullYear() + "\n" +
+        "Month (0-11): " + now.getMonth() + "\n" + 
+        "Date: " + now.getDate() + "\n" +
+        "Day (0=Sunday): " + now.getDay() + "\n" +
+        "Hours: " + now.getHours() + "\n" +
+        "Minutes: " + now.getMinutes() + "\n" +
+        "Seconds: " + now.getSeconds();
+    }
+
+    // 3. Set a custom/future date
+    function setFutureDate() {
+      let future = new Date();
+      future.setFullYear(2030);
+      future.setMonth(11); // December (0 = Jan, 11 = Dec)
+      future.setDate(25);
+      future.setHours(10);
+      future.setMinutes(30);
+      output.innerText = "Future Date Set To: " + future;
+    }
+
+    // 4. Show timestamp
+    function showTimestamp() {
+      let now = Date.now(); // milliseconds since Jan 1, 1970
+      output.innerText = "Current Timestamp (ms): " + now;
+    }
+  
+    // 5. Real-time clock
+    function startClock() {
+      setInterval(() => {
+        let now = new Date();
+        clock.innerText = 
+          now.getHours().toString().padStart(2, "0") + ":" +
+          now.getMinutes().toString().padStart(2, "0") + ":" +
+          now.getSeconds().toString().padStart(2, "0");
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
