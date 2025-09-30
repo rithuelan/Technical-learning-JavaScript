@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Events Project</title>
+  <style>
+    #hoverBox {
+      width: 150px;
+      height: 150px;
+      background: lightblue;
+      margin: 10px 0;
+      text-align: center;
+      line-height: 150px;
+      font-weight: bold;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      font-family: monospace;
+      color: darkblue;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Events Project</h1>
+
+  <!-- 1. Mouse Events -->
+  <button onclick="sayHello()">Click Me</button>
+  <button ondblclick="sayDoubleClick()">Double Click Me</button>
+  <div id="hoverBox" onmouseover="hoverIn()" onmouseout="hoverOut()">Hover Me</div>
+
+  <!-- 2. Keyboard Events -->
+  <input type="text" id="keyInput" placeholder="Type something" onkeydown="keyDown()" onkeyup="keyUp()">
+
+  <!-- 3. Form Events -->
+  <form id="myForm">
+    <input type="text" id="name" placeholder="Enter your name" onfocus="focusField()" onblur="blurField()">
+    <select id="city" onchange="cityChanged()">
+      <option value="">Choose City</option>
+      <option value="Chennai">Chennai</option>
+      <option value="Bangalore">Bangalore</option>
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Output -->
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // 1. Mouse Events
+    function sayHello() {
+      output.innerText = "Button clicked!";
+    }
+    function sayDoubleClick() {
+      output.innerText = "Button double-clicked!";
+    }
+    function hoverIn() {
+      output.innerText = "Mouse entered the box!";
+    }
+    function hoverOut() {
+      output.innerText = "Mouse left the box!";
+    }
+
+    // 2. Keyboard Events
+    function keyDown() {
+      output.innerText = "Key is being pressed...";
+    }
+    function keyUp() {
+      output.innerText = "Key released!";
+    }
+
+    // 3. Form Events
+    function focusField() {
+      output.innerText = "Input field focused!";
+    }
+    function blurField() {
+      output.innerText = "Input field lost focus!";
+    }
+    function cityChanged() {
+      let city = document.getElementById("city").value;
+      output.innerText = "City changed to: " + city;
+    }
+
+    // Form submit with event listener
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // stop page reload
+      let name = document.getElementById("name").value;
+      output.innerText = "Form submitted! Name: " + name;
+    });
+
+    // 4. Window Events
+    window.addEventListener("load", () => {
+      console.log("Page fully loaded!");
+    });
+    window.addEventListener("resize", () => {
+      output.innerText = "Window resized! Width: " + window.innerWidth;
+    });
+    window.addEventListener("scroll", () => {
+      console.log("You are scrolling the page...");
+    });
+  </script>
+</body>
+</html>
