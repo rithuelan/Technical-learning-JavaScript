@@ -29,3 +29,11 @@ learning JavaScript and updating in this repository.
 - **Strings** in JavaScript
 - **covered all topics with small project**   
 ---
+
+## **DAY 4** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **Dtae & Time**  
+- **Events** in JavaScript
+- **Error handling** in JavaScript  
+- **covered all topics with small project**   
+---
