@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timers in JavaScript</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 30px; }
+    button { margin: 8px; padding: 10px 15px; font-size: 16px; cursor: pointer; }
+    #output { margin-top: 20px; font-size: 18px; color: darkblue; }
+    #clock { margin-top: 20px; font-size: 24px; font-weight: bold; color: green; }
+  </style>
+</head>
+<body>
+  <h1>⏳ Timers Demo</h1>
+
+  <!-- Timeout buttons -->
+  <button onclick="startTimeout()">Start Timeout (5s)</button>
+  <button onclick="cancelTimeout()">Cancel Timeout</button>
+  <div id="output">No timeout yet...</div>
+
+  <!-- Interval buttons -->
+  <button onclick="startClock()">Start Clock</button>
+  <button onclick="stopClock()">Stop Clock</button>
+  <div id="clock">Clock is stopped.</div>
+
+  <script>
+    let timeoutId;  // for setTimeout
+    let intervalId; // for setInterval
+
+    // 1. setTimeout → Run code once after delay
+    function startTimeout() {
+      output.innerHTML = "⏳ Waiting for message...";
+      timeoutId = setTimeout(() => {
+        output.innerHTML = "✅ This message appeared after 5 seconds!";
+      }, 5000); // 5000ms = 5 seconds
+    }
+
+    // 2. clearTimeout → Cancel delayed task
+    function cancelTimeout() {
+      clearTimeout(timeoutId);
+      output.innerHTML = "❌ Timeout was cancelled!";
+    }
+
+    // 3. setInterval → Repeatedly run code
+    function startClock() {
+      if (intervalId) return; // prevent multiple clocks
+      intervalId = setInterval(() => {
+        let now = new Date();
+        clock.innerHTML = now.toLocaleTimeString();
+      }, 1000); // update every 1 second
+    }
+
+    // 4. clearInterval → Stop repeated task
+    function stopClock() {
+      clearInterval(intervalId);
+      intervalId = null;
+      clock.innerHTML = "⏹ Clock stopped.";
+    }
+  </script>
+</body>
+</html>
