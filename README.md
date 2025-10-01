@@ -37,3 +37,11 @@ learning JavaScript and updating in this repository.
 - **Error handling** in JavaScript  
 - **covered all topics with small project**   
 ---
+
+## **DAY 5** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **DOMs Manipulation**  
+- **BOMs** in JavaScript
+- **Timers** in JavaScript  
+- **covered all topics with small project**   
+---
