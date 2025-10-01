@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Complete Project</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .card {
+      border: 2px solid #333; padding: 15px; border-radius: 10px; width: 300px;
+    }
+    .highlight { background-color: lightyellow; }
+    .hobby { margin: 3px 0; padding: 3px; border-bottom: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>👩 Profile Card Editor</h1>
+
+  <!-- Profile Card -->
+  <div id="profileCard" class="card">
+    <img id="profileImg" src="https://via.placeholder.com/100" alt="Profile Pic" width="100">
+    <h2 id="profileName">Rithiha</h2>
+    <p id="profileAge">Age: 21</p>
+    <h3>Hobbies:</h3>
+    <ul id="hobbyList">
+      <li class="hobby">Coding</li>
+      <li class="hobby">Reading</li>
+    </ul>
+  </div>
+
+  <!-- Controls -->
+  <h2>Edit Profile</h2>
+  <input id="nameInput" type="text" placeholder="New Name">
+  <input id="ageInput" type="number" placeholder="New Age">
+  <button onclick="updateProfile()">Update Profile</button>
+  <br><br>
+
+  <input id="hobbyInput" type="text" placeholder="Add Hobby">
+  <button onclick="addHobby()">Add Hobby</button>
+  <button onclick="highlightHobbies()">Highlight Hobbies</button>
+
+  <script>
+    // 1. getElementById → Access single elements
+    const profileName = document.getElementById("profileName");
+    const profileAge = document.getElementById("profileAge");
+    const profileImg = document.getElementById("profileImg");
+    const hobbyList = document.getElementById("hobbyList");
+
+    function updateProfile() {
+      // 2. querySelector → Get inputs
+      const newName = document.querySelector("#nameInput").value;
+      const newAge = document.querySelector("#ageInput").value;
+
+      if (newName) profileName.innerHTML = newName; // 3. innerHTML
+      if (newAge) profileAge.innerHTML = "Age: " + newAge;
+
+      // 4. attributes → Change image src dynamically
+      profileImg.setAttribute("src", "https://via.placeholder.com/100/ff7f7f");
+
+      // Clear inputs
+      document.querySelector("#nameInput").value = "";
+      document.querySelector("#ageInput").value = "";
+    }
+
+    function addHobby() {
+      const newHobby = document.getElementById("hobbyInput").value;
+      if (!newHobby) return;
+
+      // 5. createElement → Create new <li>
+      const li = document.createElement("li");
+      li.classList.add("hobby"); // 6. classList
+      li.innerHTML = newHobby;
+
+      // 7. appendChild → Add to list
+      hobbyList.appendChild(li);
+
+      // 8. attributes → Store hobby as data attribute
+      li.setAttribute("data-hobby", newHobby);
+
+      document.getElementById("hobbyInput").value = "";
+    }
+
+    function highlightHobbies() {
+      // 9. querySelectorAll → Select all hobbies
+      const hobbies = document.querySelectorAll(".hobby");
+
+      hobbies.forEach(hobby => {
+        hobby.classList.toggle("highlight");
+      });
+
+      // 10. getElementsByClassName → Example usage
+      const hobbyElements = document.getElementsByClassName("hobby");
+      console.log("Total hobbies:", hobbyElements.length);
+    }
+  </script>
+</body>
+</html>
