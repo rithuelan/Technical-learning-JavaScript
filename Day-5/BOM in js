@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BOM Demo Project</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    button { margin: 5px; padding: 10px; border-radius: 5px; cursor: pointer; }
+    #output { margin-top: 20px; padding: 10px; border: 1px solid #333; }
+  </style>
+</head>
+<body>
+  <h1> BOM (Browser Object Model) Demo</h1>
+
+  <!-- Buttons for each BOM feature -->
+  <button onclick="showAlert()">Show Alert</button>
+  <button onclick="showConfirm()">Show Confirm</button>
+  <button onclick="showPrompt()">Show Prompt</button>
+  <button onclick="showLocation()">Show Location Info</button>
+  <button onclick="reloadPage()">Reload Page</button>
+  <button onclick="showNavigator()">Show Navigator Info</button>
+  <button onclick="showScreen()">Show Screen Info</button>
+
+  <div id="output"><b>Output will appear here...</b></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // 1. window + alert
+    function showAlert() {
+      window.alert("Hello! This is an alert box from window.alert()");
+    }
+
+    // 2. confirm
+    function showConfirm() {
+      let choice = confirm("Do you like JavaScript?");
+      output.innerHTML = choice 
+        ? " You clicked OK (Yes)" 
+        : " You clicked Cancel (No)";
+    }
+
+    // 3. prompt
+    function showPrompt() {
+      let name = prompt("Enter your name:");
+      output.innerHTML = name 
+        ? ` Hello, <b>${name}</b>!` 
+        : "You didn't enter a name.";
+    }
+
+    // 4. location
+    function showLocation() {
+      output.innerHTML = `
+        <h3>📍 Location Info</h3>
+        <p>Href: ${location.href}</p>
+        <p>Protocol: ${location.protocol}</p>
+        <p>Host: ${location.host}</p>
+        <p>Pathname: ${location.pathname}</p>
+      `;
+    }
+
+    function reloadPage() {
+      location.reload(); // Reload current page
+    }
+
+    // 5. navigator
+    function showNavigator() {
+      output.innerHTML = `
+        <h3> Navigator Info</h3>
+        <p>App Name: ${navigator.appName}</p>
+        <p>App Version: ${navigator.appVersion}</p>
+        <p>User Agent: ${navigator.userAgent}</p>
+        <p>Language: ${navigator.language}</p>
+        <p>Online: ${navigator.onLine}</p>
+      `;
+    }
+
+    // 6. screen
+    function showScreen() {
+      output.innerHTML = `
+        <h3>🖥 Screen Info</h3>
+        <p>Width: ${screen.width}</p>
+        <p>Height: ${screen.height}</p>
+        <p>Available Width: ${screen.availWidth}</p>
+        <p>Available Height: ${screen.availHeight}</p>
+        <p>Color Depth: ${screen.colorDepth}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
