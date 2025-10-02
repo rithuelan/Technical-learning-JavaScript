@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ES6+ Employee Directory</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, select, button { margin: 5px; padding: 5px; }
+    .employee { border: 1px solid #ccc; margin: 5px 0; padding: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Employee Directory</h1>
+
+  <input type="text" id="name" placeholder="Name">
+  <input type="text" id="role" placeholder="Role">
+  <select id="department">
+    <option value="HR">HR</option>
+    <option value="IT">IT</option>
+    <option value="Sales">Sales</option>
+  </select>
+  <button id="addBtn">Add Employee</button>
+
+  <h2>Employee List:</h2>
+  <div id="employeeList"></div>
+
+  <script>
+    // ----- ES6+ Features -----
+
+    // 1️⃣ const & let
+    const employeeList = document.getElementById("employeeList");
+    const addBtn = document.getElementById("addBtn");
+    const nameInput = document.getElementById("name");
+    const roleInput = document.getElementById("role");
+    const departmentSelect = document.getElementById("department");
+
+    const employees = [
+      { name: "Alice", role: "Developer", department: "IT" },
+      { name: "Bob", role: "Manager", department: "HR" },
+      { name: "Charlie", role: "Sales Executive", department: "Sales" }
+    ];
+
+    // 2️⃣ Arrow function + destructuring + template literals
+    const renderEmployees = () => {
+      employeeList.innerHTML = "";
+      employees.forEach(({ name, role, department }) => {
+        const div = document.createElement("div");
+        div.className = "employee";
+        div.innerHTML = `${name} | ${role} | ${department} 
+          <button class="deleteBtn">Delete</button>`; // template literal
+        employeeList.appendChild(div);
+
+        // 3️⃣ Delete using arrow function
+        div.querySelector(".deleteBtn").addEventListener("click", () => {
+          deleteEmployee(name);
+        });
+      });
+    };
+
+    // 4️⃣ Delete employee using spread operator & destructuring
+    const deleteEmployee = (empName) => {
+      const remaining = employees.filter(({ name }) => name !== empName);
+      employees.length = 0;
+      employees.push(...remaining); // spread operator
+      renderEmployees();
+    };
+
+    // 5️⃣ Add new employee
+    addBtn.addEventListener("click", () => {
+      const name = nameInput.value.trim();
+      const role = roleInput.value.trim();
+      const department = departmentSelect.value;
+
+      if(name && role){
+        const newEmp = { name, role, department }; // object literal
+        employees.push(newEmp);
+        renderEmployees();
+        nameInput.value = "";
+        roleInput.value = "";
+      }
+    });
+
+    // 6️⃣ Initial render
+    renderEmployees();
+  </script>
+</body>
+</html>
