@@ -45,3 +45,10 @@ learning JavaScript and updating in this repository.
 - **Timers** in JavaScript  
 - **covered all topics with small project**   
 ---
+
+## **DAY 6** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **ES6 + Features**  
+- **Modules** in JavaScript
+- **covered all topics with small project**   
+---
