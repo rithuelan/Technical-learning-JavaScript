@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Calculator (ES6+) Inner JS</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input { margin: 5px; padding: 5px; width: 60px; }
+    button { margin: 5px; padding: 5px 10px; }
+    #output { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Mini Calculator</h1>
+
+  <input type="number" id="num1" placeholder="Num1">
+  <input type="number" id="num2" placeholder="Num2">
+  <br>
+  <button id="addBtn">Add</button>
+  <button id="subBtn">Subtract</button>
+  <button id="mulBtn">Multiply</button>
+  <button id="divBtn">Divide</button>
+  <button id="squareBtn">Square Num1</button>
+
+  <div id="output"></div>
+
+  <script>
+    // ----------------- Simulated Modules using Objects -----------------
+
+    // "operations" module (named exports)
+    const Operations = (() => {
+      const add = (a, b) => a + b;
+      const subtract = (a, b) => a - b;
+      const multiply = (a, b) => a * b;
+      const divide = (a, b) => b !== 0 ? a / b : "Cannot divide by zero";
+
+      return { add, subtract, multiply, divide }; // named exports
+    })();
+
+    // "defaultOp" module (default export)
+    const DefaultOp = (() => {
+      const square = (x) => x * x;
+      return { square }; // default export simulated
+    })();
+
+    // ----------------- Main App -----------------
+    const num1 = document.getElementById("num1");
+    const num2 = document.getElementById("num2");
+    const output = document.getElementById("output");
+
+    document.getElementById("addBtn").addEventListener("click", () => {
+      output.innerHTML = `Result: ${Operations.add(+num1.value, +num2.value)}`;
+    });
+
+    document.getElementById("subBtn").addEventListener("click", () => {
+      output.innerHTML = `Result: ${Operations.subtract(+num1.value, +num2.value)}`;
+    });
+
+    document.getElementById("mulBtn").addEventListener("click", () => {
+      output.innerHTML = `Result: ${Operations.multiply(+num1.value, +num2.value)}`;
+    });
+
+    document.getElementById("divBtn").addEventListener("click", () => {
+      output.innerHTML = `Result: ${Operations.divide(+num1.value, +num2.value)}`;
+    });
+
+    document.getElementById("squareBtn").addEventListener("click", () => {
+      output.innerHTML = `Result: ${DefaultOp.square(+num1.value)}`;
+    });
+  </script>
+</body>
+</html>
