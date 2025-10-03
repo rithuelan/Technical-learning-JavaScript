@@ -52,3 +52,10 @@ learning JavaScript and updating in this repository.
 - **Modules** in JavaScript
 - **covered all topics with small project**   
 ---
+
+## **DAY 7** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **JSON**  
+- **Storages** in JavaScript
+- **covered all topics with small project**   
+---
