@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSON Project Demo</title>
+</head>
+<body>
+  <h1>JSON Project</h1>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // 1. JSON String → Parse into Object
+    let jsonString = '{"name":"Rithiha","age":21,"skills":["JS","HTML","CSS"]}';
+    let userObj = JSON.parse(jsonString);   // parsing
+    output.innerHTML += "<h3>1. JSON.parse()</h3>";
+    output.innerHTML += "Name: " + userObj.name + "<br>";
+    output.innerHTML += "Skills: " + userObj.skills.join(", ") + "<br><br>";
+
+    // 2. Object → Convert to JSON String
+    let product = {id:101, name:"Laptop", price:55000};
+    let productStr = JSON.stringify(product); // stringifying
+    output.innerHTML += "<h3>2. JSON.stringify()</h3>";
+    output.innerHTML += "Product JSON: " + productStr + "<br><br>";
+
+    // 3. Using JSON with API (Mock fetch)
+    output.innerHTML += "<h3>3. Fetch API with JSON</h3>";
+    // Mock API (using JSONPlaceholder free fake API)
+    fetch("https://jsonplaceholder.typicode.com/posts/1")
+      .then(response => response.json())
+      .then(data => {
+        output.innerHTML += "API Title: " + data.title + "<br>";
+        output.innerHTML += "API Body: " + data.body + "<br><br>";
+      });
+
+    // 4. Shallow vs Deep Copy
+    output.innerHTML += "<h3>4. Shallow vs Deep Copy</h3>";
+
+    let original = { user: "Rithiha", details: { city: "Chennai", age: 21 } };
+
+    // Shallow Copy (Object.assign or spread) → Nested objects are still linked
+    let shallowCopy = {...original};
+    shallowCopy.details.city = "Bangalore"; // changes original too!
+    output.innerHTML += "Original City after shallow copy change: " + original.details.city + "<br>";
+
+    // Deep Copy (JSON.parse(JSON.stringify()))
+    let deepCopy = JSON.parse(JSON.stringify(original));
+    deepCopy.details.city = "Delhi"; // does NOT affect original
+    output.innerHTML += "Original City after deep copy change: " + original.details.city + "<br>";
+    output.innerHTML += "Deep Copy City: " + deepCopy.details.city + "<br>";
+  </script>
+</body>
+</html>
