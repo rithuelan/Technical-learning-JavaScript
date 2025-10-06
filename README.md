@@ -59,3 +59,13 @@ learning JavaScript and updating in this repository.
 - **Storages** in JavaScript
 - **covered all topics with small project**   
 ---
+
+## **DAY 8** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **Fetch API & AJAX**  
+- **async request**
+- **promises**
+- **XMLHttpRequest**
+- **headers**
+- **covered all topics with small project**   
+---
