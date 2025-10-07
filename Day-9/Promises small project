@@ -1,0 +1,42 @@
+// Simulate product fetch
+function fetchProduct(id) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const products = {1: "Laptop", 2: "Phone", 3: "Tablet"};
+      if (products[id]) resolve(products[id]);
+      else reject("Product not found");
+    }, 1000);
+  });
+}
+
+// Simulate pricing fetch
+function fetchPrice(product) {
+  return new Promise((resolve) => {
+    const prices = {Laptop: 1000, Phone: 500, Tablet: 700};
+    setTimeout(() => resolve(prices[product]), 500);
+  });
+}
+
+// Chaining example: Get product and price
+fetchProduct(1)
+  .then(product => {
+    console.log("Product:", product);
+    return fetchPrice(product);
+  })
+  .then(price => console.log("Price:", price))
+  .catch(error => console.log("Error:", error))
+  .finally(() => console.log("Done fetching product and price"));
+
+// Multiple products using Promise.all
+Promise.all([fetchProduct(1), fetchProduct(2), fetchProduct(3)])
+  .then(products => {
+    console.log("All Products:", products);
+    return Promise.all(products.map(fetchPrice));
+  })
+  .then(prices => console.log("All Prices:", prices))
+  .catch(error => console.log("Error in Promise.all"));
+
+// Race example: first product to resolve
+Promise.race([fetchProduct(1), fetchProduct(2), fetchProduct(4)])
+  .then(result => console.log("First Product Ready:", result))
+  .catch(error => console.log("Race Error:", error));
