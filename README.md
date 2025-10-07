@@ -69,3 +69,16 @@ learning JavaScript and updating in this repository.
 - **headers**
 - **covered all topics with small project**   
 ---
+
+## **DAY 9** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **Promises in js**  
+- **.then, .all, .change, .race**
+- **implemented these topics with small project**
+- **Async & Await**
+- **Await**
+- **cocurancy in await & async**
+- **Error Handling**
+- **covered all topics with small project**   
+---
+
