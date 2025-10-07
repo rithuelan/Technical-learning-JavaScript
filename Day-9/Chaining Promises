@@ -1,0 +1,15 @@
+const chainPromise = new Promise((resolve, reject) => {
+  setTimeout(() => resolve(5), 500);
+});
+
+chainPromise
+  .then(result => {
+    console.log("Step 1:", result); // 5
+    return result * 2;
+  })
+  .then(result => {
+    console.log("Step 2:", result); // 10
+    return result + 10;
+  })
+  .then(result => console.log("Final Result:", result)) // 20
+  .catch(error => console.log("Error:", error));
