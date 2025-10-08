@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Class Project - School Management</title>
+</head>
+<body>
+  <h2>🎓 School Management System</h2>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // 1️⃣ Base Class
+    class Person {
+      constructor(name, age) {      // Constructor initializes object
+        this.name = name;
+        this.age = age;
+      }
+
+      introduce() {                 // Method
+        return `Hi, I'm ${this.name}, and I'm ${this.age} years old.`;
+      }
+
+      static greet() {              // Static method (called without object)
+        return "Welcome to our School System!";
+      }
+    }
+
+    // 2️⃣ Derived Class (Inheritance)
+    class Student extends Person {
+      constructor(name, age, grade) {
+        super(name, age);           // Calls constructor of parent (Person)
+        this.grade = grade;
+      }
+
+      study() {                     // Own method
+        return `${this.name} is studying for grade ${this.grade}.`;
+      }
+    }
+
+    // 3️⃣ Another Derived Class
+    class Teacher extends Person {
+      constructor(name, age, subject) {
+        super(name, age);           // Inherit name and age from Person
+        this.subject = subject;
+      }
+
+      teach() {
+        return `${this.name} teaches ${this.subject}.`;
+      }
+    }
+
+    // 4️⃣ Using Static Method
+    output.innerHTML += `<p><b>${Person.greet()}</b></p>`;
+
+    // 5️⃣ Create Objects
+    const student1 = new Student("Rithiha", 21, "12th");
+    const teacher1 = new Teacher("Mr. Raj", 35, "Mathematics");
+
+    // 6️⃣ Use Methods
+    output.innerHTML += `<p>${student1.introduce()}</p>`;
+    output.innerHTML += `<p>${student1.study()}</p>`;
+    output.innerHTML += `<p>${teacher1.introduce()}</p>`;
+    output.innerHTML += `<p>${teacher1.teach()}</p>`;
+  </script>
+</body>
+</html>
