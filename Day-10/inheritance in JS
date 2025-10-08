@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Inheritance Project</title>
+</head>
+<body>
+  <h2>🚗 Vehicle Showroom (Inheritance in JavaScript)</h2>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // 1️⃣ Parent Class (Base Class)
+    class Vehicle {
+      constructor(brand, type) {
+        this.brand = brand;
+        this.type = type;
+      }
+
+      start() {
+        return `${this.brand} (${this.type}) is starting...`;
+      }
+
+      stop() {
+        return `${this.brand} (${this.type}) has stopped.`;
+      }
+
+      // Static Method (accessible only by class, not instances)
+      static showroomInfo() {
+        return "Welcome to Rithiha Vehicle Showroom 🚘";
+      }
+    }
+
+    // 2️⃣ Child Class (inherits Vehicle)
+    class Car extends Vehicle {
+      constructor(brand, model, fuel) {
+        // super() calls parent constructor
+        super(brand, "Car");
+        this.model = model;
+        this.fuel = fuel;
+      }
+
+      // Child class adds its own method
+      details() {
+        return `${this.brand} ${this.model} runs on ${this.fuel}.`;
+      }
+
+      // Overriding parent method
+      start() {
+        return `${this.brand} ${this.model} is roaring to life 🚗💨`;
+      }
+    }
+
+    // 3️⃣ Another Child Class
+    class Bike extends Vehicle {
+      constructor(brand, cc) {
+        super(brand, "Bike");
+        this.cc = cc;
+      }
+
+      details() {
+        return `${this.brand} bike has ${this.cc}cc engine.`;
+      }
+    }
+
+    // 4️⃣ Create objects
+    const car1 = new Car("Tata", "Nexon", "Petrol");
+    const car2 = new Car("Hyundai", "Creta", "Diesel");
+    const bike1 = new Bike("Yamaha", 150);
+
+    // 5️⃣ Display Parent & Child Behavior
+    output.innerHTML += `<h3>🚘 Showroom Info:</h3>`;
+    output.innerHTML += `<p>${Vehicle.showroomInfo()}</p>`;
+
+    output.innerHTML += `<hr><h3>🚗 Cars:</h3>`;
+    output.innerHTML += `<p>${car1.details()}</p>`;
+    output.innerHTML += `<p>${car1.start()}</p>`;
+    output.innerHTML += `<p>${car1.stop()}</p>`;
+
+    output.innerHTML += `<p>${car2.details()}</p>`;
+    output.innerHTML += `<p>${car2.start()}</p>`;
+    output.innerHTML += `<p>${car2.stop()}</p>`;
+
+    output.innerHTML += `<hr><h3>🏍️ Bikes:</h3>`;
+    output.innerHTML += `<p>${bike1.details()}</p>`;
+    output.innerHTML += `<p>${bike1.start()}</p>`;
+    output.innerHTML += `<p>${bike1.stop()}</p>`;
+
+    // 6️⃣ Check Prototype Chain
+    output.innerHTML += `<hr><h3>🔗 Prototype Chain Check:</h3>`;
+    output.innerHTML += `<p>car1 instanceof Car → ${car1 instanceof Car}</p>`;
+    output.innerHTML += `<p>car1 instanceof Vehicle → ${car1 instanceof Vehicle}</p>`;
+    output.innerHTML += `<p>bike1 instanceof Vehicle → ${bike1 instanceof Vehicle}</p>`;
+    output.innerHTML += `<p>bike1.__proto__ === Bike.prototype → ${bike1.__proto__ === Bike.prototype}</p>`;
+    output.innerHTML += `<p>Bike.prototype.__proto__ === Vehicle.prototype → ${Bike.prototype.__proto__ === Vehicle.prototype}</p>`;
+  </script>
+</body>
+</html>
