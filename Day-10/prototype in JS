@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Prototype Project</title>
+</head>
+<body>
+  <h2>🚗 Car Showroom Management (Prototype in JavaScript)</h2>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // 1️⃣ Constructor Function
+    function Car(brand, model, price) {
+      this.brand = brand;
+      this.model = model;
+      this.price = price;
+    }
+
+    // 2️⃣ Adding methods using Prototype (shared for all objects)
+    Car.prototype.getDetails = function() {
+      return `${this.brand} ${this.model} costs ₹${this.price}`;
+    };
+
+    // 3️⃣ Adding another shared property to prototype
+    Car.prototype.type = "4 Wheeler";
+
+    // 4️⃣ Create objects using the constructor
+    const car1 = new Car("Tata", "Nexon", 1200000);
+    const car2 = new Car("Hyundai", "Creta", 1800000);
+
+    // 5️⃣ Accessing prototype property & method
+    output.innerHTML += `<p>${car1.getDetails()}</p>`;
+    output.innerHTML += `<p>${car2.getDetails()}</p>`;
+    output.innerHTML += `<p>${car1.brand} is a ${car1.type}</p>`;
+
+    // 6️⃣ Overriding prototype property for specific object
+    car2.type = "SUV"; 
+    output.innerHTML += `<p>${car2.brand} is a ${car2.type}</p>`;
+
+    // 7️⃣ Prototype Chain (Car -> Object)
+    output.innerHTML += `<hr><h3>🔗 Prototype Chain</h3>`;
+    output.innerHTML += `<p>car1.__proto__ === Car.prototype → ${car1.__proto__ === Car.prototype}</p>`;
+    output.innerHTML += `<p>Car.prototype.__proto__ === Object.prototype → ${Car.prototype.__proto__ === Object.prototype}</p>`;
+
+    // 8️⃣ Extending Prototype Later
+    Car.prototype.discount = function(percent) {
+      const discounted = this.price - (this.price * percent / 100);
+      return `After ${percent}% discount, ${this.brand} ${this.model} costs ₹${discounted}`;
+    };
+
+    output.innerHTML += `<hr><p>${car1.discount(10)}</p>`;
+    output.innerHTML += `<p>${car2.discount(15)}</p>`;
+
+    // 9️⃣ Creating another object using Object.create()
+    const car3 = Object.create(car1);
+    car3.brand = "Maruti";
+    car3.model = "Swift";
+    car3.price = 900000;
+    output.innerHTML += `<hr><p>${car3.getDetails()}</p>`;
+    output.innerHTML += `<p>${car3.discount(5)}</p>`;
+
+    // 🔟 Showing Prototype Reference
+    output.innerHTML += `<hr><h3>🧠 Prototype References</h3>`;
+    output.innerHTML += `<p>car1.__proto__ → ${JSON.stringify(Object.keys(car1.__proto__))}</p>`;
+    output.innerHTML += `<p>car3.__proto__ points to car1 → ${car3.__proto__ === car1}</p>`;
+  </script>
+</body>
+</html>
