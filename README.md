@@ -82,3 +82,11 @@ learning JavaScript and updating in this repository.
 - **covered all topics with small project**   
 ---
 
+## **DAY 8** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **Classes**  
+- **Prototype**
+- **inheritance**
+- **covered all topics with small project**   
+---
+
