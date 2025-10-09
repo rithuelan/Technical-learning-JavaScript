@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Functional Programming Project</title>
+</head>
+<body>
+  <h1>🛒 Functional Shopping Cart</h1>
+  <pre id="output"></pre>
+
+  <script>
+    const display = (msg) => document.getElementById("output").innerHTML = msg;
+
+    // 1️⃣ Pure function to add item
+    const addItem = (cart, item) => [...cart, item]; // immutable
+
+    // 2️⃣ Pure function to calculate total
+    const calculateTotal = (cart) => cart.reduce((sum, item) => sum + item.price, 0);
+
+    // 3️⃣ Currying for discount
+    const applyDiscount = (discount) => (amount) => amount - (amount * discount);
+
+    // 4️⃣ Function composition helper
+    const compose = (f, g) => (x) => f(g(x));
+
+    // 5️⃣ Demo usage
+    const cart = [];
+    const cart1 = addItem(cart, { name: "Laptop", price: 50000 });
+    const cart2 = addItem(cart1, { name: "Mouse", price: 1000 });
+
+    const total = calculateTotal(cart2);
+    const apply10PercentDiscount = applyDiscount(0.1);
+
+    // Using composition: first calculate total, then apply discount
+    const getDiscountedTotal = compose(apply10PercentDiscount, calculateTotal);
+
+    const result = `
+      Original Cart: ${JSON.stringify(cart2, null, 2)}
+      \nTotal Price: ₹${total}
+      \nAfter 10% Discount: ₹${getDiscountedTotal(cart2)}
+    `;
+
+    display(result);
+  </script>
+</body>
+</html>
