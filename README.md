@@ -90,3 +90,15 @@ learning JavaScript and updating in this repository.
 - **covered all topics with small project**   
 ---
 
+## **DAY 11** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **High-Order function**  
+- **This Keyword**
+- **functional programming**
+- -**composition**
+- -**pure functional**
+- -**currying**
+- -**immutablity**
+- **covered all topics with small project**   
+---
+
