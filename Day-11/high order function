@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Higher-Order Functions Examples</title>
+</head>
+<body>
+  <h2>Higher-Order Functions in JS</h2>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // ------------------------------
+    // 1️⃣ Callback Example
+    // ------------------------------
+    function greet(name, callback) {
+      const message = `Hello ${name}`;
+      callback(message);
+    }
+
+    greet("Rithiha", function(msg){
+      output.innerHTML += `<p>Callback: ${msg}</p>`;
+    });
+
+    // ------------------------------
+    // 2️⃣ map()
+    // ------------------------------
+    const numbers = [1,2,3,4,5];
+    const squared = numbers.map(num => num*num);
+    output.innerHTML += `<p>map(): Squares → [${squared}]</p>`;
+
+    // ------------------------------
+    // 3️⃣ filter()
+    // ------------------------------
+    const even = numbers.filter(num => num % 2 === 0);
+    output.innerHTML += `<p>filter(): Even numbers → [${even}]</p>`;
+
+    // ------------------------------
+    // 4️⃣ reduce()
+    // ------------------------------
+    const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+    output.innerHTML += `<p>reduce(): Sum → ${sum}</p>`;
+
+    // ------------------------------
+    // 5️⃣ forEach()
+    // ------------------------------
+    output.innerHTML += `<p>forEach(): Numbers → `;
+    numbers.forEach(num => output.innerHTML += num + " ");
+    output.innerHTML += `</p>`;
+
+    // ------------------------------
+    // 6️⃣ Function returning function
+    // ------------------------------
+    function multiplyBy(factor) {
+      return function(num) {
+        return num * factor;
+      }
+    }
+    const multiplyBy2 = multiplyBy(2);
+    output.innerHTML += `<p>Function returning function: 5 * 2 = ${multiplyBy2(5)}</p>`;
+  </script>
+</body>
+</html>
