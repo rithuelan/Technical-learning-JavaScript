@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Grades Dashboard</title>
+  <style>
+    body { font-family: Arial; max-width:600px; margin:20px auto; }
+    input, button { padding:5px; margin:5px; }
+    ul { padding-left:0; list-style:none; }
+    li { margin:5px 0; }
+  </style>
+</head>
+<body>
+  <h1>Student Grades Dashboard</h1>
+
+  <input type="text" id="studentName" placeholder="Student Name">
+  <input type="number" id="studentGrade" placeholder="Grade">
+  <button id="addStudent">Add Student</button>
+
+  <h2>Students List</h2>
+  <ul id="studentList"></ul>
+
+  <h2>Statistics</h2>
+  <div id="stats"></div>
+
+  <script>
+    const students = [];
+    const studentList = document.getElementById("studentList");
+    const stats = document.getElementById("stats");
+
+    // ------------------------------
+    // Add Student using Callback
+    // ------------------------------
+    document.getElementById("addStudent").addEventListener("click", function(){
+      const name = document.getElementById("studentName").value.trim();
+      const grade = Number(document.getElementById("studentGrade").value);
+      if(!name || isNaN(grade)) return;
+
+      // Callback function to push student
+      function addStudentCallback(student) {
+        students.push(student);
+      }
+
+      addStudentCallback({name, grade});
+      renderStudents();
+      renderStats();
+    });
+
+    // ------------------------------
+    // Render Students using forEach
+    // ------------------------------
+    function renderStudents() {
+      studentList.innerHTML = "";
+      students.forEach(student => {
+        const li = document.createElement("li");
+        li.innerText = `${student.name} → ${student.grade}`;
+        studentList.appendChild(li);
+      });
+    }
+
+    // ------------------------------
+    // Statistics using map, filter, reduce
+    // ------------------------------
+    function renderStats() {
+      if(students.length === 0){
+        stats.innerHTML = "<p>No students yet.</p>";
+        return;
+      }
+
+      // map: get grades
+      const grades = students.map(s => s.grade);
+
+      // filter: passing grades (>=50)
+      const passing = grades.filter(g => g >= 50);
+
+      // reduce: average grade
+      const average = grades.reduce((acc,g) => acc + g, 0) / grades.length;
+
+      stats.innerHTML = `
+        <p>Grades → [${grades}]</p>
+        <p>Passing → [${passing}]</p>
+        <p>Average → ${average.toFixed(2)}</p>
+      `;
+    }
+
+    // ------------------------------
+    // Function returning function
+    // Example: grade multiplier
+    function gradeMultiplier(factor) {
+      return function(grade){
+        return grade * factor;
+      }
+    }
+    const doubleGrade = gradeMultiplier(2);
+    console.log("Double Grade Example: 40 * 2 =", doubleGrade(40));
+
+  </script>
+</body>
+</html>

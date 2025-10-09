@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript this Keyword Examples</title>
+</head>
+<body>
+  <h2>`this` Keyword Examples</h2>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // 1️⃣ Global context
+    output.innerHTML += `<p>Global context: ${this}</p>`; // window in browser
+
+    // 2️⃣ Object context
+    const person = {
+      name: "Rithiha",
+      greet: function() {
+        output.innerHTML += `<p>Object method: Hello ${this.name}</p>`;
+      }
+    };
+    person.greet();
+
+    // 3️⃣ Function context
+    function showThis() {
+      output.innerHTML += `<p>Regular function: ${this}</p>`; // window in browser
+    }
+    showThis();
+
+    // 4️⃣ Arrow function context
+    const arrowFunc = () => {
+      output.innerHTML += `<p>Arrow function: ${this}</p>`; // inherits from global
+    };
+    arrowFunc();
+
+    // 5️⃣ Class context
+    class Car {
+      constructor(brand) {
+        this.brand = brand;
+      }
+      showBrand() {
+        output.innerHTML += `<p>Class method: Car brand is ${this.brand}</p>`;
+      }
+    }
+    const car1 = new Car("Tata");
+    car1.showBrand();
+
+    // 6️⃣ call()
+    function sayCity(city) {
+      output.innerHTML += `<p>Call method: ${this.name} from ${city}</p>`;
+    }
+    sayCity.call(person, "Chennai");
+
+    // 7️⃣ apply()
+    sayCity.apply(person, ["Mumbai"]);
+
+    // 8️⃣ bind()
+    const boundFunc = sayCity.bind(person, "Delhi");
+    boundFunc();
+  </script>
+</body>
+</html>

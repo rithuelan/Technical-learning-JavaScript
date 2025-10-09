@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard - this Keyword</title>
+  <style>
+    body { font-family: Arial; max-width: 700px; margin: 20px auto; }
+    button { margin: 5px; padding: 5px 10px; }
+    ul { list-style: none; padding-left: 0; }
+    li { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <h1>User Dashboard</h1>
+  <div>
+    <button id="globalBtn">Global Context</button>
+    <button id="objectBtn">Object Context</button>
+    <button id="arrowBtn">Arrow Function</button>
+    <button id="classBtn">Class Context</button>
+    <button id="callBtn">Call Example</button>
+    <button id="applyBtn">Apply Example</button>
+    <button id="bindBtn">Bind Example</button>
+  </div>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // ------------------------------
+    // Global Context
+    // ------------------------------
+    document.getElementById("globalBtn").addEventListener("click", function(){
+      output.innerHTML += `<p>Global context: ${this}</p>`; // here 'this' refers to the button because inside event listener
+    });
+
+    // ------------------------------
+    // Object Context
+    // ------------------------------
+    const user = {
+      name: "Rithiha",
+      age: 21,
+      greet: function() {
+        output.innerHTML += `<p>Object context: Hello ${this.name}, Age ${this.age}</p>`;
+      }
+    };
+    document.getElementById("objectBtn").addEventListener("click", function(){
+      user.greet();
+    });
+
+    // ------------------------------
+    // Arrow Function
+    // ------------------------------
+    const arrowFunc = () => {
+      output.innerHTML += `<p>Arrow function context: ${this}</p>`; // inherits from outer scope (window)
+    };
+    document.getElementById("arrowBtn").addEventListener("click", arrowFunc);
+
+    // ------------------------------
+    // Class Context
+    // ------------------------------
+    class Admin {
+      constructor(name) {
+        this.name = name;
+      }
+      showName() {
+        output.innerHTML += `<p>Class method: Admin Name is ${this.name}</p>`;
+      }
+    }
+    const admin1 = new Admin("Rithiha");
+    document.getElementById("classBtn").addEventListener("click", function(){
+      admin1.showName();
+    });
+
+    // ------------------------------
+    // call() Example
+    // ------------------------------
+    function sayCity(city){
+      output.innerHTML += `<p>Call Example: ${this.name} from ${city}</p>`;
+    }
+    document.getElementById("callBtn").addEventListener("click", function(){
+      sayCity.call(user, "Chennai");
+    });
+
+    // ------------------------------
+    // apply() Example
+    // ------------------------------
+    document.getElementById("applyBtn").addEventListener("click", function(){
+      sayCity.apply(user, ["Mumbai"]);
+    });
+
+    // ------------------------------
+    // bind() Example
+    // ------------------------------
+    const boundFunc = sayCity.bind(user, "Delhi");
+    document.getElementById("bindBtn").addEventListener("click", boundFunc);
+  </script>
+</body>
+</html>
