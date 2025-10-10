@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Loop Demo</title>
+</head>
+<body>
+  <h2>Open console to see Event Loop demo</h2>
+  <button id="clickBtn">Click Me</button>
+
+  <script>
+    console.log("Script start");
+
+    // Microtask
+    Promise.resolve().then(() => console.log("Promise microtask 1"));
+
+    // Task queue
+    setTimeout(() => console.log("setTimeout task 1"), 0);
+
+    // Web API + Task queue
+    document.getElementById("clickBtn").addEventListener("click", () => {
+      console.log("Button clicked (task queue)");
+    });
+
+    // Another microtask
+    Promise.resolve().then(() => console.log("Promise microtask 2"));
+
+    console.log("Script end");
+
+    // Simulate blocking operation
+    function blockingTask() {
+      for(let i=0; i<1e9; i++) {}
+      console.log("Blocking task done");
+    }
+
+    // Uncomment to see how blocking affects rendering
+    // blockingTask();
+  </script>
+</body>
+</html>
