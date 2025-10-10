@@ -1,0 +1,28 @@
+// Sample text
+let text = "I have 2 cats and 1 dog.";
+
+// 1️⃣ test() → checks if pattern exists
+let pattern1 = /\d/; // any digit
+console.log(pattern1.test(text)); // true (there are numbers)
+
+// 2️⃣ match() → returns all matches
+let pattern2 = /\d/g; // global match for digits
+console.log(text.match(pattern2)); // ["2", "1"]
+
+// 3️⃣ replace() → replaces matching text
+let pattern3 = /cats/;
+let newText = text.replace(pattern3, "birds");
+console.log(newText); // "I have 2 birds and 1 dog."
+
+// 4️⃣ exec() → returns match details
+let pattern4 = /dog/;
+let result = pattern4.exec(text);
+console.log(result);
+/* Output:
+[
+  "dog",
+  index: 17,
+  input: "I have 2 cats and 1 dog.",
+  groups: undefined
+]
+*/
