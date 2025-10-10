@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Management Demo</title>
+</head>
+<body>
+  <h2>Memory Management Demo</h2>
+  <button id="allocate">Allocate Memory</button>
+  <button id="release">Release Memory</button>
+  <button id="closureLeak">Create Closure Leak</button>
+
+  <script>
+    let memoryHolder = [];
+    let closureFunction;
+
+    // Allocate memory (simulate large objects)
+    document.getElementById("allocate").addEventListener("click", () => {
+      for(let i=0; i<100000; i++) {
+        memoryHolder.push({index: i, data: new Array(100).fill("data")});
+      }
+      console.log("Memory allocated. Current size:", memoryHolder.length);
+    });
+
+    // Release memory (simulate garbage collection)
+    document.getElementById("release").addEventListener("click", () => {
+      memoryHolder = []; // remove references
+      console.log("Memory released. memoryHolder cleared.");
+    });
+
+    // Closure memory leak
+    document.getElementById("closureLeak").addEventListener("click", () => {
+      closureFunction = (function() {
+        let largeArray = new Array(100000).fill("leak");
+        return function() {
+          console.log("Closure still holds array of size:", largeArray.length);
+        }
+      })();
+      console.log("Closure created. Memory potentially retained.");
+    });
+
+    // Demonstrate references
+    let obj1 = {name: "Alice"};
+    let obj2 = obj1;
+    obj2.name = "Bob";
+    console.log("References demo: obj1.name =", obj1.name); // Bob
+
+    // Remove references
+    obj1 = null;
+    obj2 = null; // Object now eligible for garbage collection
+  </script>
+</body>
+</html>
