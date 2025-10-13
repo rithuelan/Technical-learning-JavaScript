@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Debugging Project</title>
+</head>
+<body>
+  <h1>Shopping Cart Debugging Demo</h1>
+  <button id="calculate">Calculate Total</button>
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+    const cart = [
+      { item: "Laptop", price: 1000 },
+      { item: "Mouse", price: 50 },
+      { item: "Keyboard", price: 150 }
+    ];
+
+    document.getElementById("calculate").addEventListener("click", () => {
+      try {
+        let total = 0;
+        debugger; // breakpoint to inspect total
+        cart.forEach(product => {
+          total += product.price;
+          console.log(`Added ${product.item}, total so far: ${total}`);
+        });
+
+        output.innerHTML = `Total Price: $${total}`;
+        console.table(cart);
+      } catch (err) {
+        console.error("Error calculating total:", err);
+      } finally {
+        console.info("Calculation attempted.");
+      }
+    });
+  </script>
+</body>
+</html>
