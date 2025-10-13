@@ -1,0 +1,38 @@
+function calculateSum(a, b) {
+  debugger; // pause execution here
+  return a + b;
+}
+
+let total = calculateSum(5, 10);
+console.log(total);
+// 13. Breakpoints
+for (let i = 0; i < 5; i++) {
+    debugger; // pause execution on each iteration
+    console.log("Iteration:", i);
+}
+// 14. Conditional Breakpoints
+for (let i = 0; i < 10; i++) {
+    if (i === 7) {
+        debugger; // pause execution when i is 7
+    }
+    console.log("Count:", i);
+}
+// 15. Exception Breakpoints
+function throwError() {
+    throw new Error("This is a test error");
+}
+try {
+    throwError();
+} catch (e) {
+    console.error(e);
+}
+// 16. Step Over, Step Into, Step Out
+function outerFunction() {
+    debugger; // pause here
+    innerFunction();
+}
+function innerFunction() {
+    debugger; // pause here
+    console.log("Inside inner function");
+}
+outerFunction();
