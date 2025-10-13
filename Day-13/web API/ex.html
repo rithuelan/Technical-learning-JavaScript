@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web API Dashboard</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background: #f0f2f5; }
+  h1 { text-align: center; color: #333; }
+  section { background: white; padding: 15px; margin: 15px 0; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1);}
+  button { margin: 5px; padding: 10px 15px; border: none; border-radius: 5px; background: #007bff; color: white; cursor: pointer;}
+  button:hover { background: #0056b3; }
+  canvas { border: 1px solid #000; display: block; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<h1>🌐 Web API Dashboard</h1>
+
+<!-- 1. DOM API -->
+<section>
+  <h2>1. DOM API</h2>
+  <p id="domText">Click the button to change this text.</p>
+  <button onclick="updateDOM()">Change Text</button>
+</section>
+
+<!-- 2. Canvas API -->
+<section>
+  <h2>2. Canvas API</h2>
+  <button onclick="drawCanvas()">Draw Circle</button>
+  <canvas id="myCanvas" width="300" height="200"></canvas>
+</section>
+
+<!-- 3. Geolocation API -->
+<section>
+  <h2>3. Geolocation API</h2>
+  <button onclick="getLocation()">Get My Location</button>
+  <p id="locationOutput">Location will appear here...</p>
+</section>
+
+<!-- 4. Web Storage API -->
+<section>
+  <h2>4. Web Storage API</h2>
+  <input id="storageInput" placeholder="Enter a value">
+  <button onclick="saveData()">Save</button>
+  <button onclick="readData()">Read</button>
+  <p id="storageOutput">Stored value will appear here...</p>
+</section>
+
+<!-- 5. Notifications API -->
+<section>
+  <h2>5. Notifications API</h2>
+  <button onclick="sendNotification()">Show Notification</button>
+</section>
+
+<script>
+  // 1. DOM API
+  function updateDOM() {
+    const text = document.getElementById("domText");
+    text.textContent = "✅ DOM updated dynamically! " + new Date().toLocaleTimeString();
+    console.log("DOM updated:", text.textContent);
+  }
+
+  // 2. Canvas API
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+  function drawCanvas() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "orange";
+    ctx.beginPath();
+    ctx.arc(150,100,50,0,2*Math.PI);
+    ctx.fill();
+    console.log("Canvas circle drawn!");
+  }
+
+  // 3. Geolocation API
+  function getLocation() {
+    const output = document.getElementById("locationOutput");
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          output.textContent = `Latitude: ${pos.coords.latitude}, Longitude: ${pos.coords.longitude}`;
+          console.log("Location fetched:", pos.coords);
+        },
+        err => { output.textContent = "Error fetching location"; console.log(err); }
+      );
+    } else {
+      output.textContent = "Geolocation not supported";
+    }
+  }
+
+  // 4. Web Storage API
+  function saveData() {
+    const val = document.getElementById("storageInput").value;
+    localStorage.setItem("dashboardValue", val);
+    console.log("Saved:", val);
+  }
+  function readData() {
+    const val = localStorage.getItem("dashboardValue");
+    document.getElementById("storageOutput").textContent = val || "Nothing stored";
+    console.log("Read:", val);
+  }
+
+  // 5. Notifications API
+  function sendNotification() {
+    if (!("Notification" in window)) {
+      alert("Notifications not supported!");
+    } else if (Notification.permission === "granted") {
+      new Notification("Hello! This is a Web API notification!");
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(permission => {
+        if(permission === "granted") {
+          new Notification("Permission granted! Here's your notification.");
+        }
+      });
+    }
+  }
+</script>
+
+</body>
+</html>

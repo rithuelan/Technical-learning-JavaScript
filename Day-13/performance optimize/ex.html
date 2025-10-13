@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Performance Optimization Playground</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+    input { padding: 10px; width: 300px; margin-bottom: 20px; }
+    img { width: 300px; display: block; margin: 20px auto; border: 2px solid #ccc; }
+    #log { text-align: left; width: 90%; max-width: 800px; margin: 20px auto; height: 150px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; background: #f9f9f9; }
+    button { padding: 10px 20px; margin: 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <h1>JS Performance Optimization Playground</h1>
+
+  <!-- Debounce Search Input -->
+  <input id="search" type="text" placeholder="Type to search (Debounce example)">
+
+  <!-- Lazy Load Images -->
+  <h2>Lazy Loading Images</h2>
+  <img class="lazy" data-src="https://picsum.photos/id/1015/300/200" alt="Image 1">
+  <img class="lazy" data-src="https://picsum.photos/id/1016/300/200" alt="Image 2">
+  <img class="lazy" data-src="https://picsum.photos/id/1018/300/200" alt="Image 3">
+  <img class="lazy" data-src="https://picsum.photos/id/1020/300/200" alt="Image 4">
+
+  <!-- Scroll Throttle Example -->
+  <h2>Scroll Throttle Example</h2>
+  <p>Scroll down to see the throttle logs in action!</p>
+
+  <!-- Web Worker Button -->
+  <h2>Web Worker Example</h2>
+  <button id="runWorker">Run Heavy Calculation</button>
+
+  <!-- Logs -->
+  <h2>Console Logs (Simulated)</h2>
+  <div id="log"></div>
+
+  <script>
+    const logDiv = document.getElementById("log");
+    function log(message) {
+      logDiv.innerHTML += message + "<br>";
+      logDiv.scrollTop = logDiv.scrollHeight;
+      console.log(message);
+    }
+
+    // ===========================
+    // Debounce Function
+    function debounce(func, delay) {
+      let timeout;
+      return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+
+    const searchInput = document.getElementById("search");
+    searchInput.addEventListener("input", debounce((e) => {
+      log("Searching for: " + e.target.value);
+    }, 500));
+
+    // ===========================
+    // Throttle Function
+    function throttle(func, limit) {
+      let lastFunc;
+      let lastRan;
+      return function(...args) {
+        const context = this;
+        if (!lastRan) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        } else {
+          clearTimeout(lastFunc);
+          lastFunc = setTimeout(function() {
+            if ((Date.now() - lastRan) >= limit) {
+              func.apply(context, args);
+              lastRan = Date.now();
+            }
+          }, limit - (Date.now() - lastRan));
+        }
+      };
+    }
+
+    window.addEventListener("scroll", throttle(() => {
+      log("Scroll event fired! (Throttle example)");
+    }, 1000));
+
+    // ===========================
+    // Lazy Loading Images
+    const lazyImages = document.querySelectorAll(".lazy");
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.src = entry.target.dataset.src;
+          obs.unobserve(entry.target);
+          log("Lazy loaded: " + entry.target.alt);
+        }
+      });
+    }, { root: null, rootMargin: "0px", threshold: 0.1 });
+
+    lazyImages.forEach(img => observer.observe(img));
+
+    // ===========================
+    // Web Worker
+    const workerButton = document.getElementById("runWorker");
+    workerButton.addEventListener("click", () => {
+      if (window.Worker) {
+        const workerCode = `
+          self.addEventListener("message", function(e) {
+            const data = e.data;
+            let sum = 0;
+            for (let i = 0; i < data; i++) sum += i;
+            postMessage(sum);
+          });
+        `;
+        const blob = new Blob([workerCode], { type: "application/javascript" });
+        const worker = new Worker(URL.createObjectURL(blob));
+
+        log("Web Worker started...");
+        worker.postMessage(100000000);
+
+        worker.onmessage = function(e) {
+          log("Web Worker Result: " + e.data);
+          worker.terminate();
+        };
+      } else {
+        log("Web Workers are not supported in your browser.");
+      }
+    });
+
+    // ===========================
+    // Async Script Loading Example
+    function loadScriptAsync(url) {
+      const script = document.createElement("script");
+      script.src = url;
+      script.async = true;
+      script.onload = () => log("Async script loaded: " + url);
+      document.body.appendChild(script);
+    }
+
+    // Example: Load Lodash dynamically
+    loadScriptAsync("https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js");
+
+  </script>
+</body>
+</html>

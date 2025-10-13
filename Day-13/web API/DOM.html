@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1 id="title">Hello!</h1>
+  <button onclick="changeText()">Change Text</button>
+
+  <script>
+    function changeText() {
+      const title = document.getElementById("title");
+      title.textContent = "DOM updated dynamically!";
+      console.log("DOM updated:", title.textContent);
+    }
+  </script>
+</body>
+</html>

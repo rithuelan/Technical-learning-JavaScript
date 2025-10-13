@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <button onclick="getLocation()">Get Location</button>
+  <p id="location">Your location will appear here...</p>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            document.getElementById("location").textContent =
+              `Latitude: ${lat}, Longitude: ${lon}`;
+            console.log("Geolocation fetched:", lat, lon);
+          },
+          (error) => {
+            console.log("Error fetching location:", error.message);
+          }
+        );
+      } else {
+        console.log("Geolocation not supported.");
+      }
+    }
+  </script>
+</body>
+</html>

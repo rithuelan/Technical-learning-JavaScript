@@ -1,0 +1,24 @@
+<img class="lazy" data-src="image1.jpg" alt="Image 1">
+<img class="lazy" data-src="image2.jpg" alt="Image 2">
+
+<script>
+const lazyImages = document.querySelectorAll(".lazy");
+
+const lazyLoad = (entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      observer.unobserve(img);
+    }
+  });
+};
+
+const observer = new IntersectionObserver(lazyLoad, {
+  root: null,
+  rootMargin: "0px",
+  threshold: 0.1
+});
+
+lazyImages.forEach(img => observer.observe(img));
+</script>
