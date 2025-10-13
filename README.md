@@ -102,3 +102,22 @@ learning JavaScript and updating in this repository.
 - **covered all topics with small project**   
 ---
 
+## **DAY 12** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **REGEX**  
+- **garbage collections**
+- **event collection & concurrancy**
+- **error handling advanced**
+- **covered all topics with small project**   
+---
+
+## **DAY 13** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **WEB API**  
+- **Debugging**
+- **performance Optimization**
+- **covered all topics with small project**   
+---
+
+
+
