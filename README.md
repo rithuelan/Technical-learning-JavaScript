@@ -119,5 +119,25 @@ learning JavaScript and updating in this repository.
 - **covered all topics with small project**   
 ---
 
+## **DAY 14** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **Unit Testing**  
+- **Mocha**
+- **Chai**
+- **JEST**
+- **Testcases**
+- **Mocking**
+- **covered all topics with small project**   
+---
+
+## **DAY 15** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **Security**  
+- **XSS**
+- **INPUT SANTATION**
+- **JEST**
+- **csrf**  
+- Learned **Tooling**   
+---
 
 
