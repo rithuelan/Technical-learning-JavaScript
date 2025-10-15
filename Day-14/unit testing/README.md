@@ -174,10 +174,10 @@ Add logs or use a debugger to inspect variable states.
 Reset mocks between tests (afterEach()).
 
 🧠 Summary
-Concept	Key Takeaway
-Unit Testing	Testing individual functions/modules in isolation.
-Jest	Complete testing solution for JS/React apps.
-Mocha + Chai	Modular and customizable testing setup.
-Mocking	Simulate dependencies for isolated tests.
-Good Tests	Clear, focused, repeatable, independent.
-Coverage	Measures tested vs untested code.
+Concept	Key Takeaway:
+-Unit Testing	Testing individual functions/modules in isolation.
+-Jest	Complete testing solution for JS/React apps.
+-Mocha + Chai	Modular and customizable testing setup.
+-Mocking	Simulate dependencies for isolated tests.
+-Good Tests	Clear, focused, repeatable, independent.
+-Coverage	Measures tested vs untested code.
