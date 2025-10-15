@@ -1,0 +1,22 @@
+{
+  "name": "js-tooling-demo",
+  "version": "1.0.0",
+  "description": "A simple JavaScript project demonstrating npm, ESLint, Prettier, and Webpack setup.",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write src/**/*.js",
+    "build": "webpack",
+    "start": "node dist/bundle.js"
+  },
+  "devDependencies": {
+    "eslint": "^9.12.0",
+    "prettier": "^3.3.3",
+    "webpack": "^5.97.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "Rithiha Elangovan",
+  "license": "MIT"
+}
