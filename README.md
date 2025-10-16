@@ -140,4 +140,34 @@ learning JavaScript and updating in this repository.
 - Learned **Tooling**   
 ---
 
+## **DAY 15** – Technical Learning 💻
+### **JavaScript Training**
+- Learned **JavaScript in the Browser**
+---Rendering
+--- Storage
+--- History API
+--- Media API
+- **JavaScript in Node.js**
+---Modules
+---filesystem
+---HTTP
+---npm packages
+---process
+---object
+- **WebSockets**
+---Realtime communication
+---socket.io basics 
+- **Service Workers & PWA**
+---Offline caching
+---background sync
+---installable apps 
+- **TypeScript Basics**
+---Types
+---interfaces
+---type inference
+---decorators
+---generics 
+---
+
+
 
