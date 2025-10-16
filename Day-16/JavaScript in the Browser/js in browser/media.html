@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Media API Example</title>
+</head>
+<body>
+  <h2>Camera & Audio Access 🎥🎤</h2>
+  <button onclick="startMedia()">Start Media</button><br><br>
+  <video id="video" width="300" height="200" autoplay></video>
+
+  <script>
+    async function startMedia() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        const video = document.getElementById("video");
+        video.srcObject = stream;
+      } catch (error) {
+        alert("Access denied or device not found!");
+      }
+    }
+  </script>
+</body>
+</html>

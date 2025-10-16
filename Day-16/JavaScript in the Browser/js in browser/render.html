@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rendering Example</title>
+</head>
+<body>
+  <h2 id="title">Hello, User!</h2>
+  <button onclick="changeContent()">Change Content</button>
+
+  <script>
+    function changeContent() {
+      const title = document.getElementById("title");
+      title.innerText = "Welcome to JavaScript Rendering! 🎨";
+      title.style.color = "blue";
+    }
+  </script>
+</body>
+</html>

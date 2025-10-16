@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>History API Example</title>
+</head>
+<body>
+  <button onclick="goHome()">Go Home</button>
+  <button onclick="goAbout()">Go About</button>
+  <button onclick="goBack()">Go Back</button>
+  <p id="content">Home Page 🏠</p>
+
+  <script>
+    function goHome() {
+      history.pushState({ page: "home" }, "Home", "?home");
+      document.getElementById("content").innerText = "Home Page 🏠";
+    }
+
+    function goAbout() {
+      history.pushState({ page: "about" }, "About", "?about");
+      document.getElementById("content").innerText = "About Page 📘";
+    }
+
+    function goBack() {
+      history.back(); // goes back one step
+    }
+
+    // Listen to browser navigation
+    window.onpopstate = function(event) {
+      if (event.state) {
+        document.getElementById("content").innerText =
+          event.state.page === "home" ? "Home Page 🏠" : "About Page 📘";
+      }
+    };
+  </script>
+</body>
+</html>
