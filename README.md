@@ -140,7 +140,7 @@ learning JavaScript and updating in this repository.
 - Learned **Tooling**   
 ---
 
-## **DAY 15** – Technical Learning 💻
+## **DAY 16** – Technical Learning 💻
 ### **JavaScript Training**
 - Learned **JavaScript in the Browser**
 ---Rendering
