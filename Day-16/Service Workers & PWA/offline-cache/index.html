@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Offline Cache Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Offline Caching Example</h1>
+  <p>This page works offline once loaded!</p>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('✅ Service Worker Registered'))
+        .catch(err => console.error('SW registration failed:', err));
+    }
+  </script>
+</body>
+</html>
