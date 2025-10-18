@@ -1,0 +1,16 @@
+{
+  "name": "mvvm-vanilla",
+  "version": "1.0.0",
+  "description": "MVVM (Frontend — Vanilla JS implementation)\r When to use",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

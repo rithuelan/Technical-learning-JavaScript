@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>MVVM Vanilla Example</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+  </style>
+</head>
+<body>
+  <h1>MVVM (Vanilla JS)</h1>
+
+  <label>
+    Name:
+    <input id="nameInput" type="text" />
+  </label>
+
+  <p>Live preview: <span id="namePreview"></span></p>
+
+  <h2>Users</h2>
+  <ul id="userList"></ul>
+
+  <form id="userForm">
+    <input id="newUserName" placeholder="User name" />
+    <button type="submit">Add User</button>
+  </form>
+
+  <script src="server.js"></script>
+</body>
+</html>
